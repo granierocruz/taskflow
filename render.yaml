@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: taskflow-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix backend
+    startCommand: node backend/src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: taskflow_jwt_secret_super_seguro_producao_2026
+      - key: JWT_REFRESH_SECRET
+        value: taskflow_refresh_secret_super_seguro_producao_2026
+      - key: FRONTEND_URL
+        value: "*"

@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "frontend"
+    "frontend",
+    "backend"
   ],
   "scripts": {
-    "build": "npm run build --workspace=frontend",
+    "build": "npm run build --workspace=frontend --if-present",
+    "build:backend": "npm install --prefix backend",
+    "start": "node backend/src/server.js",
     "dev": "npm run dev --workspace=frontend"
   },
   "optionalDependencies": {

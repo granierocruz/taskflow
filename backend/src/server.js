@@ -14,8 +14,12 @@ const tagRoutes = require('./routes/tags');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const corsOrigin = process.env.FRONTEND_URL && process.env.FRONTEND_URL !== '*' 
+  ? process.env.FRONTEND_URL 
+  : true;
+
 // Middlewares globais
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+app.use(cors({ origin: corsOrigin, credentials: true }));
 app.use(express.json());
 
 // Rotas
