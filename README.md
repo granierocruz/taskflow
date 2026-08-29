@@ -51,51 +51,70 @@ O **TaskFlow** é uma solução completa para organização e acompanhamento de 
 
 ---
 
-## 🚀 Como Executar o Projeto Localmente
+## 🌐 Hospedagem na Vercel (Deploy do Frontend)
 
-### Pré-requisitos
-- [Node.js](https://nodejs.org/) (versão 18 ou superior)
-- [Git](https://git-scm.com/)
+O projeto já está 100% configurado para a Vercel com arquivos `vercel.json` tanto na raiz quanto na pasta `frontend/`, garantindo o redirecionamento correto das rotas do React Router (SPA).
+
+### Passo a passo para Deploy na Vercel:
+
+1. Acesse o painel da [Vercel](https://vercel.com/) e clique em **Add New Project**.
+2. Importe o repositório **[`granierocruz/taskflow`](https://github.com/granierocruz/taskflow)**.
+3. Se solicitado, defina:
+   - **Framework Preset:** `Vite`
+   - **Root Directory:** `frontend` (ou deixe na raiz `/`, pois o `vercel.json` raiz cuidará do build automaticamente).
+4. Em **Environment Variables**, adicione a seguinte variável:
+
+| Variável | Descrição | Exemplo de Valor |
+| :--- | :--- | :--- |
+| `VITE_API_URL` | URL da API do backend com o caminho `/api` | `https://sua-api-taskflow.onrender.com/api` |
+
+5. Clique em **Deploy**! 🚀
 
 ---
 
-### 1. Clonar o Repositório
+## ⚙️ Variáveis de Ambiente
 
+### Frontend (`frontend/.env`)
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+### Backend (`backend/.env`)
+```env
+PORT=3001
+JWT_SECRET=sua_chave_secreta_jwt_longa_e_segura
+JWT_REFRESH_SECRET=sua_chave_secreta_refresh_jwt_segura
+FRONTEND_URL=http://localhost:5173
+NODE_ENV=development
+```
+
+---
+
+## 🚀 Como Executar Localmente
+
+### 1. Clonar o Repositório
 ```bash
 git clone https://github.com/granierocruz/taskflow.git
 cd taskflow
 ```
 
----
-
-### 2. Configurar e Executar o Backend
-
+### 2. Backend
 ```bash
 cd backend
 npm install
-
-# Copie o arquivo de exemplo de ambiente
 cp .env.example .env
-
-# Inicie o servidor da API (porta padrão: 3001)
 npm run dev
 ```
 
----
-
-### 3. Configurar e Executar o Frontend
-
-Em um novo terminal:
-
+### 3. Frontend
 ```bash
 cd frontend
 npm install
-
-# Inicie a aplicação React (porta padrão: 5173)
+cp .env.example .env
 npm run dev
 ```
 
-Abra seu navegador em [http://localhost:5173](http://localhost:5173) e aproveite o TaskFlow!
+Acesse [http://localhost:5173](http://localhost:5173) no seu navegador.
 
 ---
 
@@ -113,15 +132,18 @@ taskflow/
 │   └── package.json
 ├── frontend/
 │   ├── src/
-│   │   ├── api/             # Cliente Axios e chamadas aos endpoints
+│   │   ├── api/             # Cliente Axios e chamadas aos endpoints (com VITE_API_URL)
 │   │   ├── components/      # Componentes reutilizáveis (Layout, Sidebar, Tasks)
 │   │   ├── contexts/        # Contextos React (Auth, Toast)
 │   │   ├── pages/           # Páginas (Dashboard, Tasks, Categories, Settings, Login, Register)
 │   │   ├── styles/          # Design Tokens e CSS Global
 │   │   ├── App.jsx          # Configuração de rotas
 │   │   └── main.jsx
+│   ├── .env.example
+│   ├── vercel.json          # Configuração SPA para Vercel
 │   ├── index.html
 │   └── package.json
+├── vercel.json              # Configuração Vercel na raiz
 ├── .gitignore
 └── README.md
 ```
@@ -130,4 +152,4 @@ taskflow/
 
 ## 📄 Licença
 
-Este projeto é desenvolvido para fins educacionais e profissionais. Distribuído sob a licença MIT.
+Distribuído sob a licença MIT.
